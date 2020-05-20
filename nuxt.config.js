@@ -102,14 +102,16 @@ module.exports = {
           login: {
             url: '/auth/signin',
             method: 'post',
-            propertyName: 'data.accessToken'
+            propertyName: false
+            // 'data.accessToken'
           },
           logout: false,
           // { url: '/auth/signout', method: 'post' }
           user: {
             url: '/test/user',
             method: 'get',
-            propertyName: 'data.username'
+            propertyName: false
+            // 'data.username'
           }
         },
         // tokenRequired: true,

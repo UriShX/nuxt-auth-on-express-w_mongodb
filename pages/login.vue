@@ -23,9 +23,11 @@ export default {
         // eslint-disable-next-line
         // console.log(response)
 
-        this.$auth.$storage.getCookie(response.data.accessToken)
-
-        this.$auth.setUserToken(response.data.accessToken)
+        this.$auth.$storage.setCookie(
+          '_token.local',
+          response.data.accessToken,
+          true
+        )
 
         this.$auth.setUser(response.data)
         if (this.$auth.hasScope('admin')) {
