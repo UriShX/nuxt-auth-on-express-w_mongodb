@@ -9,18 +9,18 @@ exports.allAccess = (req, res) => {
 }
 
 exports.userBoard = (req, res) => {
-  console.log(req.userId)
   User.findOne({
     // username: req.body.username
     _id: req.userId
   })
     .populate('roles', '-__v')
     .exec((err, user) => {
-      // console.log(user)
+      console.log(user)
       if (err) {
         res.status(500).send({ message: err })
         return
       }
+      // res.sendStatus(200)
       res.status(200).send({
         username: user.username,
         email: user.email

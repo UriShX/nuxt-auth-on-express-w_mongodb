@@ -88,6 +88,14 @@ module.exports = {
    * Auth config
    */
   auth: {
+    localStorage: false,
+    cookie: {
+      prefix: 'auth.',
+      options: {
+        path: '/',
+        maxAge: 86400 // 24 hours
+      }
+    },
     strategies: {
       local: {
         endpoints: {
@@ -114,5 +122,6 @@ module.exports = {
       callback: false,
       logout: false
     }
+    // plugins: [{ src: '~/plugins/auth.js', mode: 'client' }]
   }
 }

@@ -19,8 +19,14 @@ export default {
         const response = await this.$auth.loginWith('local', {
           data: loginInfo
         })
-        /* eslint no-console: ["error", { allow: ["warn", "error"] }] */
-        // console.warn(response)
+
+        // eslint-disable-next-line
+        // console.log(response)
+
+        this.$auth.$storage.getCookie(response.data.accessToken)
+
+        this.$auth.setUserToken(response.data.accessToken)
+
         this.$auth.setUser(response.data)
         if (this.$auth.hasScope('admin')) {
           this.$auth.user.admin = true
