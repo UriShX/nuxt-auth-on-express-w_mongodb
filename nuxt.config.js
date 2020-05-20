@@ -124,6 +124,5 @@ module.exports = {
       callback: false,
       logout: false
     }
-    // plugins: [{ src: '~/plugins/auth.js', mode: 'client' }]
   }
 }
