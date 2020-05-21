@@ -70,6 +70,9 @@ export default {
   components: {
     Logo,
     VuetifyLogo
+  },
+  head: {
+    title: 'Home'
   }
 }
 </script>

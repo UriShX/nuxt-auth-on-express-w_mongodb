@@ -44,6 +44,9 @@ export default {
         })
       }
     }
+  },
+  head: {
+    title: 'Login'
   }
 }
 </script>
