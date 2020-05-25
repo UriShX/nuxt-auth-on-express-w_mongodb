@@ -29,7 +29,14 @@ export default {
           true
         )
 
-        this.$auth.setUser(response.data)
+        this.$auth.$storage.setCookie(
+          '_refresh_token.local',
+          response.data.refreshToken,
+          true
+        )
+
+        await this.$auth.setUserToken(response.data.accessToken)
+
         if (this.$auth.hasScope('admin')) {
           this.$auth.user.admin = true
         }
@@ -37,6 +44,7 @@ export default {
           text: `Thanks for signing in, ${this.$auth.user.username}`
         })
         this.$router.push('/')
+        // this.$router.push(`/user/${this.$auth.user.id}`)
       } catch {
         this.$store.dispatch('snackbar/create', {
           color: 'red',

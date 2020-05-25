@@ -52,8 +52,8 @@ export default {
       showPassword: false,
       userInfo: {
         username: '',
-        email: '',
-        password: ''
+        email: 'urish@urishx.com',
+        password: 'q1w2e3r4t5y6'
       },
       ...validations
     }

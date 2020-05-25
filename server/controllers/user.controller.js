@@ -20,10 +20,19 @@ exports.userBoard = (req, res) => {
         res.status(500).send({ message: err })
         return
       }
+
+      var authorities = []
+
+      for (let i = 0; i < user.roles.length; i++) {
+        authorities.push(user.roles[i].name.toLowerCase())
+      }
+
       // res.sendStatus(200)
       res.status(200).send({
+        id: user._id,
         username: user.username,
-        email: user.email
+        email: user.email,
+        scope: authorities
       })
     })
 

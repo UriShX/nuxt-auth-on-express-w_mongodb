@@ -6,6 +6,8 @@ const Role = db.role
 var jwt = require('jsonwebtoken')
 var bcrypt = require('bcryptjs')
 
+const accessTokenExpiresIn = '20m'
+
 exports.signup = (req, res) => {
   const user = new User({
     username: req.body.username,
@@ -89,21 +91,52 @@ exports.signin = (req, res) => {
         })
       }
 
-      var token = jwt.sign({ id: user.id }, config.secret, {
-        expiresIn: 86400 // 24 hours
+      const accessToken = jwt.sign({ id: user.id }, config.secret, {
+        expiresIn: accessTokenExpiresIn
       })
+      const refreshToken = jwt.sign(
+        { id: user.id },
+        config.refreshTokenSecret,
+        {
+          expiresIn: 86400 // 24 hours
+        }
+      )
 
-      var authorities = []
+      config.refreshTokens.push(refreshToken)
 
-      for (let i = 0; i < user.roles.length; i++) {
-        authorities.push(user.roles[i].name.toLowerCase())
-      }
       res.status(200).send({
-        id: user._id,
-        username: user.username,
-        email: user.email,
-        scope: authorities,
-        accessToken: token
+        accessToken,
+        refreshToken
       })
     })
+}
+
+exports.refresh = (req, res) => {
+  console.log('refreshing token')
+
+  // const { token } = req.body
+  let refreshToken = req.cookies['auth._refresh_token.local']
+
+  if (!refreshToken) {
+    return res.sendStatus(401)
+  }
+
+  if (!config.refreshTokens.includes(refreshToken)) {
+    return res.sendStatus(403)
+  }
+
+  jwt.verify(refreshToken, config.refreshTokenSecret, (err, user) => {
+    if (err) {
+      return res.sendStatus(403)
+    }
+
+    const accessToken = jwt.sign({ id: user.id }, config.secret, {
+      expiresIn: accessTokenExpiresIn
+    })
+
+    res.json({
+      accessToken,
+      refreshToken
+    })
+  })
 }

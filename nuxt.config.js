@@ -88,6 +88,7 @@ module.exports = {
    * Auth config
    */
   auth: {
+    watchLoggedIn: true,
     localStorage: false,
     cookie: {
       prefix: 'auth.',
@@ -105,6 +106,11 @@ module.exports = {
             propertyName: false
             // 'data.accessToken'
           },
+          refresh: {
+            url: '/auth/refresh',
+            method: 'post',
+            propertyName: false
+          },
           logout: false,
           // { url: '/auth/signout', method: 'post' }
           user: {
@@ -117,12 +123,16 @@ module.exports = {
         // tokenRequired: true,
         tokenType: '',
         autoFetchUser: false
-      }
+      },
+      scopeKey: 'scope'
     },
+    // resetOnError: true,
     redirect: {
-      home: false,
-      callback: false,
-      logout: false
-    }
+      login: '/login',
+      logout: '/',
+      home: '/',
+      callback: false
+    },
+    plugins: [{ src: '~/plugins/auth.js', mode: 'client' }]
   }
 }

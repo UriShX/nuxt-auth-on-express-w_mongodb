@@ -1,6 +1,7 @@
 <template>
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8 md6>
+      <div class="text-center">Token expires in: {{ expiration }}</div>
       <div class="text-center">
         <logo />
         <vuetify-logo />
@@ -70,6 +71,45 @@ export default {
   components: {
     Logo,
     VuetifyLogo
+  },
+  computed: {
+    expiration() {
+      const token = this.$auth.$storage.getCookie('_token.local')
+
+      let str = ''
+
+      if (token) {
+        str = JSON.stringify(token)
+
+        str = str.split('.')[1]
+
+        str = str.replace('/-/g', '+')
+        str = str.replace('/_/g', '/')
+        switch (str.length % 4) {
+          case 0:
+            break
+          case 2:
+            str += '=='
+            break
+          case 3:
+            str += '='
+            break
+          default:
+            throw new Error('Invalid token')
+        }
+
+        str = (str + '===').slice(0, str.length + (str.length % 4))
+        str = str.replace(/-/g, '+').replace(/_/g, '/')
+
+        str = decodeURIComponent(
+          escape(Buffer.from(str, 'base64').toString('binary'))
+        )
+
+        str = JSON.parse(str)
+      }
+
+      return str
+    }
   },
   head: {
     title: 'Home'
