@@ -22,9 +22,28 @@ export default {
       try {
         await this.$axios.post('/auth/signup', registrationInfo)
 
-        await this.$auth.loginWith('local', {
+        const response = await this.$auth.loginWith('local', {
           data: registrationInfo
         })
+
+        this.$auth.$storage.setCookie(
+          '_token.local',
+          response.data.accessToken,
+          true
+        )
+
+        this.$auth.$storage.setCookie(
+          '_refresh_token.local',
+          response.data.refreshToken,
+          true
+        )
+
+        await this.$auth.setUserToken(response.data.accessToken)
+
+        if (this.$auth.hasScope('admin')) {
+          this.$auth.user.admin = true
+        }
+
         this.$store.dispatch('snackbar/create', {
           text: `Thanks for signing up, ${this.$auth.user.username}`
         })
