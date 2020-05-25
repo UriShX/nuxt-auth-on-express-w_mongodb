@@ -43,8 +43,8 @@ export default {
         this.$store.dispatch('snackbar/create', {
           text: `Thanks for signing in, ${this.$auth.user.username}`
         })
-        this.$router.push('/')
-        // this.$router.push(`/user/${this.$auth.user.id}`)
+        // this.$router.push('/')
+        this.$router.push(`/user/${this.$auth.user.id}`)
       } catch {
         this.$store.dispatch('snackbar/create', {
           color: 'red',
