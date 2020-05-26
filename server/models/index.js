@@ -5,7 +5,7 @@ const db = {}
 
 db.mongoose = mongoose
 
-db.URI = require('../config/keys').mongoURI
+db.URI = process.env.MONGO_URI || require('../config/keys').mongoURI
 
 db.user = require('./user.model')
 db.role = require('./role.model')
