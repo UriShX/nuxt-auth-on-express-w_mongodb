@@ -105,6 +105,8 @@ async function start() {
 
   const { host, port } = nuxt.options.server
 
+  nuxt.options.axios.baseURL = `http://${host}:${port}/api`
+
   await nuxt.ready()
   // Build only in dev mode
   if (config.dev) {
