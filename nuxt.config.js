@@ -54,7 +54,7 @@ module.exports = {
   axios: {
     baseURL:
       process.env.BASE_URL ||
-      `http://${this.server.host}:${this.server.port}/api` ||
+      `http://${argv.host}:${argv.port}/api` ||
       'http://localhost:3000/api'
   },
   /*
