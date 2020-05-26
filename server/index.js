@@ -106,9 +106,9 @@ async function start() {
   const { host, port } = nuxt.options.server
 
   if (process.env.NODE_ENV !== 'production') {
-    nuxt.options.server.baseURL = 'http://localhost:3000/api'
+    nuxt.options.axios.baseURL = 'http://localhost:3000/api'
   } else {
-    nuxt.options.server.basrURL = `https://${host}:${port}/api`
+    nuxt.options.axios.baseURL = `https://${host}:${port}/api`
   }
 
   await nuxt.ready()
