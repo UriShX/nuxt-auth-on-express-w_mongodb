@@ -27,6 +27,9 @@ module.exports = {
    ** Global CSS
    */
   css: [],
+  router: {
+    middleware: ['loggedIn']
+  },
   /*
    ** Plugins to load before mounting the App
    */
