@@ -55,9 +55,7 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    prefix: '/api',
-    host: process.env.HOST,
-    port: process.env.PORT
+    prefix: '/api'
   },
   /*
    ** vuetify module configuration
@@ -138,6 +136,9 @@ module.exports = {
       home: '/',
       callback: false
     },
-    plugins: [{ src: '~/plugins/auth.js', mode: 'client' }]
+    plugins: [
+      '~/plugins/axios.js',
+      { src: '~/plugins/auth.js', mode: 'client' }
+    ]
   }
 }
