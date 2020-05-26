@@ -54,13 +54,7 @@ module.exports = {
    ** Axios module configuration
    ** See https://axios.nuxtjs.org/options
    */
-  axios: {
-    baseURL:
-      process.env.NODE_ENV !== 'production'
-        ? 'http://localhost:3000/api'
-        : null,
-    prefix: process.env.NODE_ENV === 'production' ? '/api' : ''
-  },
+  axios: {},
   /*
    ** vuetify module configuration
    ** https://github.com/nuxt-community/vuetify-module

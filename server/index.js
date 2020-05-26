@@ -105,6 +105,12 @@ async function start() {
 
   const { host, port } = nuxt.options.server
 
+  if (process.env.NODE_ENV !== 'production') {
+    nuxt.options.server.baseURL = 'http://localhost:3000/api'
+  } else {
+    nuxt.options.server.prefix = '/api'
+  }
+
   await nuxt.ready()
   // Build only in dev mode
   if (config.dev) {
