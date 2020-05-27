@@ -9,6 +9,7 @@ const q =
   typeof process.env.BASE_URL === 'string'
     ? url.parse(process.env.BASE_URL, true)
     : null
+console.log(q)
 
 // Transform req & res to have the same API as express
 // So we can use res.status() & res.json()
@@ -29,6 +30,8 @@ config.axios.baseURL =
   q !== null
     ? `${q.protocol}//${q.host}:${process.env.PORT}/api`
     : 'http://localhost:3000/api'
+
+console.log(config.axios)
 
 // DB Config
 const db = require('./models')
