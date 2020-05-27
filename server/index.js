@@ -35,8 +35,9 @@ db.mongoose
     console.log('MongoDB Connected')
     initial()
   })
-  .then(() => {
-    db.mongoose.connection.db.listCollections().toArray(function(err, names) {
+  .then(async () => {
+    const collections = await db.mongoose.connection.db.listCollections()
+    collections.toArray(function(err, names) {
       if (err) {
         console.log(err)
       } else {
