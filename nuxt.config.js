@@ -146,9 +146,6 @@ module.exports = {
       home: '/',
       callback: false
     },
-    plugins: [
-      // '~/plugins/axios.js',
-      { src: '~/plugins/auth.js', mode: 'client' }
-    ]
+    plugins: [{ src: '~/plugins/auth.js', mode: 'client' }]
   }
 }

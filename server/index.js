@@ -4,15 +4,6 @@ const { Nuxt, Builder } = require('nuxt')
 const app = express()
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-let q =
-  typeof process.env.BASE_URL === 'string'
-    ? new URL(process.env.BASE_URL)
-    : null
-if (q !== null) {
-  q.pathname = '/api'
-  q.port = process.env.PORT
-}
-// console.log(q)
 
 // Transform req & res to have the same API as express
 // So we can use res.status() & res.json()
@@ -28,10 +19,6 @@ router.use((req, res, next) => {
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
-
-// config.axios.baseURL = q !== null ? q.href : 'http://localhost:3000/api'
-
-console.log(config.axios)
 
 // DB Config
 const db = require('./models')
