@@ -18,7 +18,7 @@ export const actions = {
           ? url.parse(process.env.BASE_URL, true)
           : null
       commit('setEnv', {
-        BASE_URL =
+        BASE_URL:
           q !== null
             ? `${q.protocol}//${q.host}:${process.env.PORT}/api`
             : 'http://localhost:3000/api'
