@@ -4,8 +4,6 @@ const { Nuxt, Builder } = require('nuxt')
 const app = express()
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
-const url = require('url')
-const q = url.parse(process.env.BASE_URL, true)
 
 // Transform req & res to have the same API as express
 // So we can use res.status() & res.json()
@@ -114,8 +112,6 @@ async function start() {
   if (config.dev) {
     const builder = new Builder(nuxt)
     await builder.build()
-  } else {
-    nuxt.options.axios.baseURL = `${q.protocol}//${q.host}:${port}/api`
   }
 
   // Give nuxt middleware to express
