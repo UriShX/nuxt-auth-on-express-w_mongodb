@@ -29,7 +29,7 @@ router.use((req, res, next) => {
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
 
-config.axios.baseURL = q !== null ? q.href : 'http://localhost:3000/api'
+// config.axios.baseURL = q !== null ? q.href : 'http://localhost:3000/api'
 
 console.log(config.axios)
 

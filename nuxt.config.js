@@ -56,7 +56,8 @@ module.exports = {
    */
   axios: {
     prefix: '/api',
-    port: process.env.PORT
+    port: process.env.PORT,
+    host: process.env.BASE_URL
     // baseURL: 'http://localhost:3000/api'
   },
   /*
@@ -139,7 +140,7 @@ module.exports = {
       callback: false
     },
     plugins: [
-      '~/plugins/axios.js',
+      // '~/plugins/axios.js',
       { src: '~/plugins/auth.js', mode: 'client' }
     ]
   }
