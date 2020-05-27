@@ -25,7 +25,6 @@ router.use((req, res, next) => {
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
-// nuxt.options.axios.baseURL = `http://${host}:${port}/api`
 config.axios.baseURL =
   q !== null
     ? `${q.protocol}//${q.host}:${process.env.PORT}/api`

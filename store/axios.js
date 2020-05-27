@@ -1,3 +1,5 @@
+const url = require('url')
+
 export const state = () => ({
   env: {}
 })
@@ -11,9 +13,15 @@ export const mutations = {
 export const actions = {
   nuxtServerInit({ commit }) {
     if (process.server) {
+      const q =
+        typeof process.env.BASE_URL === 'string'
+          ? url.parse(process.env.BASE_URL, true)
+          : null
       commit('setEnv', {
-        HOST: process.env.HOST || '0.0.0.0',
-        PORT: process.env.PORT || '3000'
+        BASE_URL =
+          q !== null
+            ? `${q.protocol}//${q.host}:${process.env.PORT}/api`
+            : 'http://localhost:3000/api'
       })
     }
   }
