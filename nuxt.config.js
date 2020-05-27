@@ -1,5 +1,15 @@
 const colors = require('vuetify/es5/util/colors').default
 
+let q =
+  typeof process.env.BASE_URL === 'string'
+    ? new URL(process.env.BASE_URL)
+    : null
+
+if (q !== null) {
+  q.pathname = '/api'
+  q.port = process.env.PORT
+}
+
 module.exports = {
   mode: 'universal',
   /*
@@ -55,10 +65,7 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
-    prefix: '/api',
-    port: process.env.PORT,
-    host: process.env.BASE_URL
-    // baseURL: 'http://localhost:3000/api'
+    baseURL: q.href || 'http://localhost:3000/api'
   },
   /*
    ** vuetify module configuration
