@@ -4,6 +4,11 @@ const { Nuxt, Builder } = require('nuxt')
 const app = express()
 const cookieParser = require('cookie-parser')
 const cors = require('cors')
+const url = require('url')
+const q =
+  typeof process.env.BASE_URL === 'string'
+    ? url.parse(process.env.BASE_URL, true)
+    : null
 
 // Transform req & res to have the same API as express
 // So we can use res.status() & res.json()
@@ -19,6 +24,11 @@ router.use((req, res, next) => {
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
+// nuxt.options.axios.baseURL = `http://${host}:${port}/api`
+config.axios.baseURL =
+  q !== null
+    ? `${q.protocol}//${q.host}:${process.env.PORT}/api`
+    : 'http://localhost:3000/api'
 
 // DB Config
 const db = require('./models')
@@ -104,8 +114,6 @@ async function start() {
   const nuxt = new Nuxt(config)
 
   const { host, port } = nuxt.options.server
-
-  // nuxt.options.axios.baseURL = `http://${host}:${port}/api`
 
   await nuxt.ready()
   // Build only in dev mode
