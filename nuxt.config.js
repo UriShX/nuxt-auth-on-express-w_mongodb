@@ -139,7 +139,7 @@ module.exports = {
       callback: false
     },
     plugins: [
-      // '~/plugins/axios.js',
+      '~/plugins/axios.js',
       { src: '~/plugins/auth.js', mode: 'client' }
     ]
   }

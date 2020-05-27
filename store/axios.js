@@ -13,15 +13,18 @@ export const mutations = {
 export const actions = {
   nuxtServerInit({ commit }) {
     if (process.server) {
-      const q =
+      let q =
         typeof process.env.BASE_URL === 'string'
           ? new URL(process.env.BASE_URL)
           : null
 
-      const parsedURL =
-        q !== null ? `${q.protocol}//${q.host}:${process.env.PORT}/api` : null
+      if (q !== null) {
+        q.pathname = '/api'
+        q.port = process.env.PORT
+      }
+
       commit('setEnv', {
-        BASE_URL: parsedURL || 'http://localhost:3000/api'
+        BASE_URL: q.href || 'http://localhost:3000/api'
       })
     }
   }
