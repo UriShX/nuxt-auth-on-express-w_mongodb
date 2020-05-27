@@ -25,12 +25,12 @@ router.use((req, res, next) => {
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
-config.axios.baseURL =
-  q !== null
-    ? `${q.protocol}//${q.host}:${process.env.PORT}/api`
-    : 'http://localhost:3000/api'
+// config.axios.baseURL =
+//   q !== null
+//     ? `${q.protocol}//${q.host}:${process.env.PORT}/api`
+//     : 'http://localhost:3000/api'
 
-console.log(config.axios)
+// console.log(config.axios)
 
 // DB Config
 const db = require('./models')

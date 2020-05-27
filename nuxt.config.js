@@ -55,6 +55,8 @@ module.exports = {
    ** See https://axios.nuxtjs.org/options
    */
   axios: {
+    prefix: '/api',
+    port: process.env.PORT
     // baseURL: 'http://localhost:3000/api'
   },
   /*
@@ -137,7 +139,7 @@ module.exports = {
       callback: false
     },
     plugins: [
-      '~/plugins/axios.js',
+      // '~/plugins/axios.js',
       { src: '~/plugins/auth.js', mode: 'client' }
     ]
   }
