@@ -12,6 +12,8 @@ Copy `server/config/#keys.js` to `server/config/keys.js`, and set MongoDB connec
 
 This app is deployed on a Heroku dyno. The MongoDB Atlas URI is setup as a environment variable, so that there's no need for a `keys.js` file, and the app can be stored on Github (and deployed from there) with ease.
 
+Set heroku path: `heroku config:set HEROKU_URL=$(heroku apps:info -s | grep web_url | cut -d= -f2)`
+
 ## Build Setup
 
 ```bash
