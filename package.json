@@ -21,7 +21,7 @@
     "cors": "^2.8.5",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
-    "jsonwebtoken": "^8.5.1",
+    "jsonwebtoken": "^9.0.0",
     "mongoose": "^5.9.15",
     "nuxt": "^2.14.6"
   },
